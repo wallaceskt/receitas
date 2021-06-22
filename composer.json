@@ -1,10 +1,16 @@
 {
     "name": "wallaceoliveira/receitas",
+    "description": "Projeto para estudo de MVC com PHP.",
     "authors": [
         {
             "name": "Wallace Oliveira",
             "email": "wallacesales@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    }
 }
