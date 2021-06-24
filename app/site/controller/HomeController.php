@@ -1,7 +1,9 @@
 <?php
 namespace app\site\controller;
 
-class HomeController {
+use app\core\Controller;
+
+class HomeController extends Controller {
     
     public function __construct() {
 
@@ -11,7 +13,7 @@ class HomeController {
 
     public function index() {
 
-        echo "index home";
+        $this->load('home/main');
 
     }
 
