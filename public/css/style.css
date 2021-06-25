@@ -1,0 +1,12 @@
+:root {
+    --table-thead-bg: #3c4c5d;
+}
+
+.max-width {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.tr-thead {
+    background-color: var(--table-thead-bg);
+}
