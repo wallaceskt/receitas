@@ -16,8 +16,10 @@
     {% include "partials/header.twig.php" %}
 
     <div class="container">
-    {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
     </div>
-    
+
+    <script src="{{BASE}}js/script.js"></script>
+
 </body>
 </html>

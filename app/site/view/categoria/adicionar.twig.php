@@ -9,13 +9,13 @@
 
 <div class="row">
 
-    <form action="{{BASE}}categoria/insert" method="post">
+    <form action="{{BASE}}categoria/insert" method="post" onsubmit="return validar(false);">
 
         <fieldset>
         
             <div class="row">
                 
-                <div class="divAlert">
+                <div id="divAlert">
 
                     <div class="alert alert-info">Preencha corretamente todos os campos!</div>
 
@@ -48,4 +48,6 @@
     </form>
 
 </div>
+
+<script src="{{BASE}}js/categoria.js"></script>
 {% endblock %}
