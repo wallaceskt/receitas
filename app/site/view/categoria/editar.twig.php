@@ -9,7 +9,7 @@
 
 <div class="row">
 
-    <form action="{{BASE}}categoria/insert" method="post" onsubmit="return validar(false);">
+    <form action="{{BASE}}categoria/alterar/{{categoriaId}}" method="post" onsubmit="return validar(true);">
 
         <fieldset>
         
@@ -26,20 +26,21 @@
             <div class="form-group">
                 
                 <label for="txtTitulo" class="form-label">Título</label>
-                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet">
+                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet" value="{{categoria.titulo}}">
+                <input type="hidden" id="txtId" value="{{categoriaId}}">
             
             </div>
         
             <div class="form-group mt-4">
                 
                 <label for="txtSlug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="txtSlug" name="txtSlug" placeholder="lorem-ipsum-dolor-sit-amet">
+                <input type="text" class="form-control" id="txtSlug" name="txtSlug" placeholder="lorem-ipsum-dolor-sit-amet" value="{{categoria.slug}}">
             
             </div>
     
             <div class="form-group mt-4">
 
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+                <button type="submit" class="btn btn-success">Editar</button>
 
             </div>
 

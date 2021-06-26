@@ -26,9 +26,40 @@ class CategoriaController extends Controller {
 
     }
 
-    public function editar() {
+    public function editar($categoriaId = 0) {
 
-        $this->load('categoria/editar');
+        $categoriaId = filter_var($categoriaId, FILTER_SANITIZE_NUMBER_INT);
+
+        if ($categoriaId <= 0) {
+            
+            $this->showMessage(
+                'Fomulário inválido',
+                'Dados inválidos ou incompletos.',
+                'categoria'
+            );
+
+            return;
+        
+        }
+
+        $categoria = $this->categoriaModel->lerPorId($categoriaId);
+
+        if ($categoria->titulo == null) {
+                
+            $this->showMessage(
+                'Categoria não encontrada',
+                'Dados inválidos ou incompletos.',
+                'categoria'
+            );
+
+            return;
+        
+        }
+
+        $this->load('categoria/editar', [
+            'categoria' => $categoria,
+            'categoriaId' => $categoriaId
+        ]);
 
     }
 
@@ -64,6 +95,40 @@ class CategoriaController extends Controller {
         }
 
         redirect(BASE . 'categoria/editar/' . $result);
+
+    }
+
+    public function alterar($categoriaId = 0) {
+
+        $categoriaId = filter_var($categoriaId, FILTER_SANITIZE_NUMBER_INT);
+        $titulo = filter_input(INPUT_POST, 'txtTitulo', FILTER_SANITIZE_STRING);
+        $slug = filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING);
+
+        if ($categoriaId <= 0 || strlen($titulo) < 2 || strlen($slug) < 3) {
+
+            $this->showMessage(
+                'Fomulário inválido',
+                'Dados inválidos ou incompletos.',
+                'categoria/'
+            );
+
+            return;
+        
+        }
+
+        if (!$this->categoriaModel->alterar($categoriaId, $titulo, $slug)) {
+            
+            $this->showMessage(
+                'Erro',
+                'Houve um erro ao tentar alterar. Tente novamente mais tarde.',
+                'categoria/editar/' . $categoriaId
+            );
+
+            return;
+
+        }
+
+        redirect(BASE . 'categoria/editar/' . $categoriaId);
 
     }
 
