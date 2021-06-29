@@ -16,7 +16,9 @@ class CategoriaController extends Controller {
 
     public function index() {
 
-        $this->load('categoria/main');
+        $this->load('categoria/main', [
+            'listaCategoria' => $this->categoriaModel->lerTodos()
+        ]);
 
     }
 

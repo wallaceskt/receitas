@@ -10,18 +10,24 @@
     
     <table class="table table-hover">
         <thead>
-            <tr class="table-primary tr-thead">
+            <tr class="table-primary">
+                <th>#</th>
                 <th>Nome</th>
                 <th>Slug</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="table-secondary">
-                <td></td>
-                <td></td>
-                <td>Editar | Excluir</td>
+
+            {% for categoria in listaCategoria %}
+            <tr>
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.titulo}}</td>
+                <td>{{categoria.slug}}</td>
+                <td><a href="{{BASE}}categoria/editar/{{categoria.id}}" class="btn btn-warning">Editar</a> | <a href="{{BASE}}categoria/excluir/{{categoria.id}}" class="btn btn-warning">Excluir</a></td>
             </tr>
+            {% endfor %}
+
         </tbody>
     </table>
 

@@ -53,6 +53,22 @@ class CategoriaModel {
 
     }
 
+    public function lerTodos() {
+
+        $sql = 'SELECT id, titulo, slug FROM categoria ORDER BY titulo ASC';
+        $dt = $this->pdo->executeQuery($sql);
+        $lista = [];
+
+        foreach ($dt as $dr) {
+            
+            $lista[] = $this->collection($dr);
+
+        }
+
+        return $lista;
+
+    }
+
     public function collection($arr) {
 
         return (object)[
