@@ -51,4 +51,8 @@
 </div>
 
 <script src="{{BASE}}js/receita.js"></script>
+<script src="{{BASE}}vendor/ckeditor/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('txtDescricao');
+</script>
 {% endblock %}

@@ -2,6 +2,7 @@
 namespace app\site\model;
 
 use app\core\Model;
+use app\site\entities\Receita;
 
 class ReceitaModel {
     
@@ -13,15 +14,16 @@ class ReceitaModel {
 
     }
 
-    public function inserir(string $titulo, string $slug, string $linhaFina, string $descricao, int $categoriaId) {
+    public function inserir(Receita $receita) {
 
-        $sql = 'INSERT INTO receita (titulo, slug, linha_fina, descricao, categoria_id) VALUES (:t, :s, :l, :d, :cid)';
+        $sql = 'INSERT INTO receita (titulo, slug, linha_fina, descricao, categoria_id, data) VALUES (:t, :s, :l, :d, :cid, :dt)';
         $params = [
-            ':t' => $titulo,
-            ':s' => $slug,
-            ':l' => $linhaFina,
-            ':d' => $descricao,
-            ':cid' => $categoriaId
+            ':t' => $receita->getTitulo(),
+            ':s' => $receita->getSlug(),
+            ':l' => $receita->getLinhaFina(),
+            ':d' => $receita->getDescricao(),
+            ':cid' => $receita->getCategoriaId(),
+            ':dt' => $receita->getData()
         ];
 
         if (!$this->pdo->executeNonQuery($sql, $params))
@@ -31,16 +33,16 @@ class ReceitaModel {
 
     }
 
-    public function alterar(int $id, string $titulo, string $slug, string $linhaFina, string $descricao, int $categoriaId) {
+    public function alterar(Receita $receita) {
 
         $sql = 'UPDATE receita SET titulo = :t, slug = :s, linha_fina = :l, descricao = :d, categoria_id = :cid WHERE id = :id';
         $params = [
-            ':id' => $id,
-            ':t' => $titulo,
-            ':s' => $slug,
-            ':l' => $linhaFina,
-            ':d' => $descricao,
-            ':cid' => $categoriaId
+            ':id' => $receita->getId(),
+            ':t' => $receita->getTitulo(),
+            ':s' => $receita->getSlug(),
+            ':l' => $receita->getLinhaFina(),
+            ':d' => $receita->getDescricao(),
+            ':cid' => $receita->getCategoriaId()
         ];
 
         return $this->pdo->executeNonQuery($sql, $params);
@@ -49,7 +51,7 @@ class ReceitaModel {
 
     public function lerPorId(int $receitaId) {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id WHERE r.id = :id';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id WHERE r.id = :id';
         $param = [
             ':id' => $receitaId
         ];
@@ -59,9 +61,29 @@ class ReceitaModel {
 
     }
 
+    public function lerTodosPorCategoria(int $categoriaId) {
+
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE c.id = :cid';
+        $param = [
+            ':cid' => $categoriaId
+        ];
+        $dt = $this->pdo->executeQuery($sql, $param);
+
+        $lista = [];
+
+        foreach ($dt as $dr) {
+
+            $lista[] = $this->collection($dr);
+
+        }
+
+        return $lista;
+
+    }
+
     public function lerTodos() {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id ORDER BY r.titulo ASC';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id ORDER BY r.titulo ASC';
         $dt = $this->pdo->executeQuery($sql);
         $lista = [];
 
@@ -77,15 +99,17 @@ class ReceitaModel {
 
     public function collection($arr) {
 
-        return (object)[
-            'id' => $arr['id'] ?? null,
-            'titulo' => $arr['titulo'] ?? null,
-            'slug' => $arr['slug'] ?? null,
-            'linhaFina' => $arr['linha_fina'] ?? null,
-            'descricao' => $arr['descricao'] ?? null,
-            'categoriaId' => $arr['categoria_id'] ?? null,
-            'categoria' => $arr['categoria'] ?? null
-        ];
+        $receita = new Receita();
+        $receita->setId($arr['id'] ?? null);
+        $receita->setTitulo($arr['titulo'] ?? null);
+        $receita->setSlug($arr['slug'] ?? null);
+        $receita->setLinhaFina($arr['linha_fina'] ?? null);
+        $receita->setDescricao($arr['descricao'] ?? null);
+        $receita->setCategoriaId($arr['categoria_id'] ?? null);
+        $receita->setCategoria($arr['categoria'] ?? null);
+        $receita->setData($arr['data'] ?? null);
+        
+        return $receita;
 
     }
 
