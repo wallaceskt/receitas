@@ -86,13 +86,13 @@ class Receita {
     
     }
 
-    public function getData() {
+    public function getCategoria() {
 
         return $this->categoria;
     
     }
 
-    public function setData($categoria) {
+    public function setCategoria($categoria) {
 
         $this->categoria = $categoria;
     
