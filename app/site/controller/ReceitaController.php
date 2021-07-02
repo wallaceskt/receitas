@@ -130,7 +130,8 @@ class ReceitaController extends Controller {
 
         }
 
-        redirect(BASE . 'receita/editar/' . $result);
+        redirect(BASE . 'receita/');
+        //redirect(BASE . 'receita/editar/' . $result);
 
     }
 
@@ -170,7 +171,8 @@ class ReceitaController extends Controller {
 
         }
 
-        redirect(BASE . 'receita/editar/' . $receitaId);
+        redirect(BASE . 'receita/');
+        //redirect(BASE . 'receita/editar/' . $receitaId);
 
     }
 

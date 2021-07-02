@@ -12,10 +12,10 @@
 
 <div class="row">
 
-    <p>Categoria: {{receita.categoria}}<br>Publicado em {{receita.data|date('d/m/Y H:i:s')}}</p>
-    <p>{{receita.slug}}</p>
-    <p>{{receita.linhaFina}}</p>
-    <p>{{receita.descricao}}</p>
+    <h5>{{receita.linhaFina}}</h5>
+    <p><em>Categoria: {{receita.categoria}}<br>Publicado em {{receita.data|date('d/m/Y H:i:s')}}</em></p>
+    <!-- <p>{{receita.slug}}</p> -->
+    <p>{{receita.descricao|raw}}</p>
 
 </div>
 

@@ -13,3 +13,11 @@
     box-shadow: inset 0 0 0 9999px var(--table-thead-bg);
     
 }
+
+a.btn {
+    margin-right: .75rem;
+}
+
+a.btn:last-child {
+    margin-right: 0;
+}

@@ -19,7 +19,7 @@ class ReceitaModel {
         $sql = 'INSERT INTO receita (titulo, slug, linha_fina, descricao, categoria_id, data) VALUES (:t, :s, :l, :d, :cid, :dt)';
         $params = [
             ':t' => $receita->getTitulo(),
-            ':s' => $receita->getSlug(),
+            ':s' => gerarSlug($receita->getTitulo()),//$receita->getSlug(),
             ':l' => $receita->getLinhaFina(),
             ':d' => $receita->getDescricao(),
             ':cid' => $receita->getCategoriaId(),
@@ -39,7 +39,7 @@ class ReceitaModel {
         $params = [
             ':id' => $receita->getId(),
             ':t' => $receita->getTitulo(),
-            ':s' => $receita->getSlug(),
+            ':s' => gerarSlug($receita->getTitulo()),//$receita->getSlug(),
             ':l' => $receita->getLinhaFina(),
             ':d' => $receita->getDescricao(),
             ':cid' => $receita->getCategoriaId()
@@ -63,7 +63,7 @@ class ReceitaModel {
 
     public function lerUltimos($limit = 10) {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id LIMIT :l';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id ORDER BY r.data DESC LIMIT :l';
         $param = [
             ':l' => $limit
         ];
@@ -83,7 +83,7 @@ class ReceitaModel {
 
     public function lerTodosPorCategoria(int $categoriaId) {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE c.id = :cid';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE c.id = :cid ORDER BY r.data DESC';
         $param = [
             ':cid' => $categoriaId
         ];
@@ -124,7 +124,7 @@ class ReceitaModel {
         $receita->setTitulo($arr['titulo'] ?? null);
         $receita->setSlug($arr['slug'] ?? null);
         $receita->setLinhaFina($arr['linha_fina'] ?? null);
-        $receita->setDescricao($arr['descricao'] ?? null);
+        $receita->setDescricao(html_entity_decode($arr['descricao'] ?? null));
         $receita->setCategoriaId($arr['categoria_id'] ?? null);
         $receita->setCategoria($arr['categoria'] ?? null);
         $receita->setData($arr['data'] ?? null);

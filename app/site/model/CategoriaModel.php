@@ -18,7 +18,7 @@ class CategoriaModel {
         $sql = 'INSERT INTO categoria (titulo, slug) VALUES (:t, :s)';
         $params = [
             ':t' => $titulo,
-            ':s' => $slug
+            ':s' => gerarSlug($titulo) //$slug
         ];
 
         if (!$this->pdo->executeNonQuery($sql, $params))
@@ -34,7 +34,7 @@ class CategoriaModel {
         $params = [
             ':id' => $id,
             ':t' => $titulo,
-            ':s' => $slug
+            ':s' => gerarSlug($titulo) //$slug
         ];
 
         return $this->pdo->executeNonQuery($sql, $params);
