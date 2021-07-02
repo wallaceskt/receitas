@@ -18,9 +18,26 @@ class ReceitaController extends Controller {
 
     public function index() {
 
+        $receitas = [];
+
+        if (filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT)) {
+
+            $receitas = $this->receitaModel->lerTodosPorCategoria(filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT));
+            
+        } else {
+
+            $receitas = $this->receitaModel->lerUltimos(15);
+
+        }
+
         $this->load('receita/main', [
-            'listaReceita' => $this->receitaModel->lerTodos()
+            'listaCategoria' => (new CategoriaModel())->lerTodos(),
+            'receitas' => $receitas,
+            'categoriaId' => filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT)
         ]);
+        // $this->load('receita/main', [
+        //     'listaReceita' => $this->receitaModel->lerTodos()
+        // ]);
 
     }
 
@@ -41,7 +58,7 @@ class ReceitaController extends Controller {
             $this->showMessage(
                 'Fomulário inválido',
                 'Dados inválidos ou incompletos.',
-                'receita'
+                'receita/'
             );
 
             return;
@@ -50,26 +67,40 @@ class ReceitaController extends Controller {
 
         $receita = $this->receitaModel->lerPorId($receitaId);
 
-        if ($receita->titulo == null) {
-                
+        $this->load('receita/editar', [
+            'receita' => $receita,
+            'receitaId' => $receitaId,
+            'listaCategoria' => (new CategoriaModel())->lerTodos()
+        ]);
+
+    }
+
+    public function ver($receitaId = 0) {
+
+        $receitaId = filter_var($receitaId, FILTER_SANITIZE_NUMBER_INT);
+
+        if ($receitaId <= 0) {
+            
             $this->showMessage(
-                'receita não encontrada',
+                'Fomulário inválido',
                 'Dados inválidos ou incompletos.',
-                'receita'
+                'receita/'
             );
 
             return;
         
         }
 
-        $this->load('receita/editar', [
+        $receita = $this->receitaModel->lerPorId($receitaId);
+
+        $this->load('receita/ver', [
             'receita' => $receita,
             'receitaId' => $receitaId
         ]);
 
     }
 
-    public function insert() {
+    public function inserir() {
 
         $receita = $this->getInput();
 
@@ -85,34 +116,37 @@ class ReceitaController extends Controller {
 
         }
 
-        // $result = $this->receitaModel->inserir($titulo, $slug);
+        $result = $this->receitaModel->inserir($receita);
 
-        // if ($result <= 0) {
+        if ($result <= 0) {
 
-        //     $this->showMessage(
-        //         'Erro',
-        //         'Houve um erro ao tentar cadastrar. Tente novamente mais tarde.',
-        //         'receita/adicionar'
-        //     );
+            $this->showMessage(
+                'Erro',
+                'Houve um erro ao tentar cadastrar. Tente novamente mais tarde.',
+                'receita/adicionar'
+            );
 
-        //     return;
+            return;
 
-        // }
+        }
 
-        // redirect(BASE . 'receita/editar/' . $result);
+        redirect(BASE . 'receita/editar/' . $result);
 
     }
 
     public function alterar($receitaId = 0) {
 
-        $receitaId = filter_var($receitaId, FILTER_SANITIZE_NUMBER_INT);
-        $titulo = filter_input(INPUT_POST, 'txtTitulo', FILTER_SANITIZE_STRING);
-        $slug = filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING);
-        $linhaFina = filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING);
-        $descricao = filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_STRING);
-        $caegoriaId = filter_var($categoriaId, FILTER_SANITIZE_NUMBER_INT);
+        // $receitaId = filter_var($receitaId, FILTER_SANITIZE_NUMBER_INT);
+        // $titulo = filter_input(INPUT_POST, 'txtTitulo', FILTER_SANITIZE_STRING);
+        // $slug = filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING);
+        // $linhaFina = filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING);
+        // $descricao = filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_STRING);
+        // $caegoriaId = filter_var($categoriaId, FILTER_SANITIZE_NUMBER_INT);
+        $receita = $this->getInput();
+        $receita->setId($receitaId);
+        //dd($receita);
 
-        if ($receitaId <= 0 || strlen($titulo) < 2 || strlen($slug) < 3) {
+        if (!$this->validar($receita)) {
 
             $this->showMessage(
                 'Fomulário inválido',
@@ -124,7 +158,7 @@ class ReceitaController extends Controller {
         
         }
 
-        if (!$this->receitaModel->alterar($receitaId, $titulo, $slug)) {
+        if (!$this->receitaModel->alterar($receita)) {
             
             $this->showMessage(
                 'Erro',
@@ -148,6 +182,7 @@ class ReceitaController extends Controller {
         $receita->setLinhaFina(filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING));
         $receita->setDescricao(filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_SPECIAL_CHARS));
         $receita->setCategoriaId(filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT));
+        $receita->setData(getCurrentDate());
 
         return $receita;
 

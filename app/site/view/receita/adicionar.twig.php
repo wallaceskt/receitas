@@ -9,7 +9,7 @@
 
 <div class="row">
 
-    <form action="{{BASE}}receita/insert" method="post" onsubmit="return validar(false);">
+    <form action="{{BASE}}receita/inserir" method="post" onsubmit="return validar(false);">
 
         <fieldset>
         

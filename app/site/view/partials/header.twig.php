@@ -16,10 +16,10 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{BASE}}categoria/">Categoria</a>
+                    <a class="nav-link" href="{{BASE}}categoria/">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{BASE}}receita/">Receita</a>
+                    <a class="nav-link" href="{{BASE}}receita/">Receitas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{BASE}}sobre/">Sobre</a>

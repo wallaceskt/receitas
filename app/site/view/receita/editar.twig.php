@@ -22,19 +22,48 @@
                 </div>
             
             </div>
-        
-            <div class="form-group">
+
+            <div class="row">
+            
+                <div class="form-group col-md-4 mt-4">
+                    
+                    <label for="txtTitulo" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet" value="{{receita.titulo}}">
+                    <input type="hidden" id="txtId" value="{{receitaId}}">
                 
-                <label for="txtTitulo" class="form-label">Título</label>
-                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet" value="{{receita.titulo}}">
-                <input type="hidden" id="txtId" value="{{receitaId}}">
+                </div>
+            
+                <div class="form-group col-md-4 mt-4">
+                
+                    <label for="txtSlug" class="form-label">Slug</label>
+                    <input type="text" class="form-control" id="txtSlug" name="txtSlug" placeholder="lorem-ipsum-dolor-sit-amet" value="{{receita.slug}}">
+                
+                </div>
+            
+                <div class="form-group col-md-4 mt-4">
+                    
+                    <label for="slCategoria" class="form-label">Categoria</label>
+                    <select name="slCategoria" id="slCategoria" class="form-control">
+                        {% for categoria in listaCategoria %}
+                        <option value="{{categoria.id}}" {{categoria.id == receita.categoriaId ? 'selected' : ''}}>{{categoria.titulo}}</option>
+                        {% endfor %}
+                    </select>
+                
+                </div>
+
+            </div>
+        
+            <div class="form-group mt-4">
+                
+                <label for="txtLinhaFina" class="form-label">Linha fina</label>
+                <input type="text" class="form-control" id="txtLinhaFina" name="txtLinhaFina" placeholder="Descreva a receita" minlength="10" maxlenght="250" value="{{receita.linhaFina}}">
             
             </div>
         
             <div class="form-group mt-4">
                 
-                <label for="txtSlug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="txtSlug" name="txtSlug" placeholder="lorem-ipsum-dolor-sit-amet" value="{{receita.slug}}">
+                <label for="txtDescricao" class="form-label">Receita</label>
+                <textarea id="txtDescricao" name="txtDescricao">{{receita.descricao}}</textarea>
             
             </div>
     

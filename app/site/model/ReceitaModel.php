@@ -61,6 +61,26 @@ class ReceitaModel {
 
     }
 
+    public function lerUltimos($limit = 10) {
+
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id LIMIT :l';
+        $param = [
+            ':l' => $limit
+        ];
+        $dt = $this->pdo->executeQuery($sql, $param);
+
+        $lista = [];
+
+        foreach ($dt as $dr) {
+
+            $lista[] = $this->collection($dr);
+
+        }
+
+        return $lista;
+
+    }
+
     public function lerTodosPorCategoria(int $categoriaId) {
 
         $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE c.id = :cid';
