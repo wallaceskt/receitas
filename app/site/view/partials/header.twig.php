@@ -26,9 +26,9 @@
                 </li>
             </ul>
 
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <form method="get" action="{{BASE}}pesquisa/" id="frmPesquisa" class="d-flex">
+                <input class="form-control me-sm-2" type="text" name="txtPesquisa" id="txtPesquisa" placeholder="Pesquisar" min-length="2" required>
+                <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="pesquisar();">Pesquisar</button>
             </form>
 
         </div>
