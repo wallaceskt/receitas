@@ -2,6 +2,7 @@
 namespace app\site\controller;
 
 use app\core\Controller;
+use app\site\model\ReceitaModel;
 
 class PesquisaController extends Controller {
     
@@ -20,8 +21,28 @@ class PesquisaController extends Controller {
 
     public function p(string $termo) {
 
-        //$this->load('home/main');
-        echo $termo;
+        $termo = filter_var($termo, FILTER_SANITIZE_STRING);
+        $termo = strip_tags($termo);
+
+        if (strlen(trim($termo)) <= 2) {
+
+            $this->showMessage(
+                'Fomulário inválido',
+                'Dados inválidos ou incompletos.',
+                ''
+            );
+            
+            return;
+
+        }
+
+        $receitas = (new ReceitaModel())->pesquisar($termo);
+
+        $this->load('pesquisa/main', [
+            'receitas' => $receitas,
+            'termo' => $termo,
+            'quantidadeResultado' => count($receitas)
+        ]);
 
     }
 

@@ -101,6 +101,27 @@ class ReceitaModel {
 
     }
 
+    public function pesquisar(string $termo) {
+
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE r.titulo LIKE :t OR r.linha_fina LIKE :l ORDER BY r.titulo ASC';
+        $params = [
+            ':t' => "%". $termo . "%", //"%{$termo}%"
+            ':l' => "%". $termo . "%" //"%{$termo}%"
+        ];
+        $dt = $this->pdo->executeQuery($sql, $params);
+
+        $lista = [];
+
+        foreach ($dt as $dr) {
+
+            $lista[] = $this->collection($dr);
+
+        }
+
+        return $lista;
+
+    }
+
     public function lerTodos() {
 
         $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id ORDER BY r.titulo ASC';
