@@ -52,7 +52,7 @@
                 <td>{{receita.slug}}</td>
                 <td>{{receita.categoria}}</td>
                 <td>{{receita.data|date('d/m/Y H:i:s')}}</td>
-                <td><a href="{{BASE}}receita/ver/{{receita.id}}" class="btn btn-info">Ver</a>
+                <td><a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-info">Ver</a>
                 <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-warning">Editar</a>
                 <a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-danger">Excluir</a></td>
             </tr>

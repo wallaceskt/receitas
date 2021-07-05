@@ -75,11 +75,11 @@ class ReceitaController extends Controller {
 
     }
 
-    public function ver($receitaId = 0) {
+    public function ver(string $slug) {
 
-        $receitaId = filter_var($receitaId, FILTER_SANITIZE_NUMBER_INT);
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
 
-        if ($receitaId <= 0) {
+        if (strlen($slug) <= 2) {
             
             $this->showMessage(
                 'Fomulário inválido',
@@ -91,7 +91,7 @@ class ReceitaController extends Controller {
         
         }
 
-        $receita = $this->receitaModel->lerPorId($receitaId);
+        $receita = $this->receitaModel->lerPorSlug($slug);
 
         $this->load('receita/ver', [
             'receita' => $receita,

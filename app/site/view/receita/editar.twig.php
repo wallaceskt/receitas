@@ -5,6 +5,8 @@
 {% block body %}
 <h1>Editar receita</h1>
 
+<a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-primary">Ver receita</a>
+
 <hr>
 
 <div class="row">

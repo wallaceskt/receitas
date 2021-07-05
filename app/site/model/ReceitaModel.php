@@ -48,12 +48,24 @@ class ReceitaModel {
         return $this->pdo->executeNonQuery($sql, $params);
 
     }
-
+    
     public function lerPorId(int $receitaId) {
 
         $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id WHERE r.id = :id';
         $param = [
             ':id' => $receitaId
+        ];
+        $dr = $this->pdo->executeQueryOneRow($sql, $param);
+
+        return $this->collection($dr);
+
+    }
+
+    public function lerPorSlug(string $slug) {
+
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON r.categoria_id = c.id WHERE r.slug = :s';
+        $param = [
+            ':s' => $slug
         ];
         $dr = $this->pdo->executeQueryOneRow($sql, $param);
 
@@ -81,9 +93,30 @@ class ReceitaModel {
 
     }
 
+    public function lerPorCategoriaLimit(int $categoriaId, int $limit = 4) {
+
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE r.categoria_id = :cid ORDER BY r.data DESC LIMIT :l';
+        $params = [
+            ':cid' => $categoriaId,
+            ':l' => $limit
+        ];
+        $dt = $this->pdo->executeQuery($sql, $params);
+
+        $lista = [];
+
+        foreach ($dt as $dr) {
+
+            $lista[] = $this->collection($dr);
+
+        }
+
+        return $lista;
+
+    }
+
     public function lerTodosPorCategoria(int $categoriaId) {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE c.id = :cid ORDER BY r.data DESC';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE r.categoria_id = :cid ORDER BY r.data DESC';
         $param = [
             ':cid' => $categoriaId
         ];
