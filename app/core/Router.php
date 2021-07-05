@@ -5,11 +5,15 @@ class Router {
 
     // Atributo privado
     private $uriEx;
+    private $cliente;
     
     public function __construct() {
 
         $this->init();
         $this->execute();
+
+        // ?? verifica se a $_SESSION['Cliente'] tem valor. Caso contrário será null. E atribui ao cliente
+        $this->cliente = $_SESSION['Cliente'] ?? null;
 
     }
 
@@ -64,6 +68,31 @@ class Router {
 
             }
         
+        }
+        
+        $baseController = 'app\\site\\controller\\';
+        if (isset($_SESSION['Cliente'])) {
+            
+            $pgPermission = [$baseController . 'DashboardController', $baseController . 'CategoriaController', $baseController . 'ReceitaController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'LoginController', $baseController . 'PesquisaController'];
+            // Se não existir nenhum controller ou se o controller não estiver dentro do array de página(s)/controller(s) permitidos, o cliente não tem permissão para acessar a página
+            if (!isset($controller) || !in_array($controller, $pgPermission)) {
+
+                $controller = 'app\\site\\controller\\LoginController';
+                $method = 'index';
+            
+            }
+            
+        } else {
+            
+            $pgPermission = [$baseController . 'LoginController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'PesquisaController'];
+            // Se não exixtir nenhum controller ou se o controller não estiver dentro do array de página(s)/controller(s) permitidos, o cliente não tem permissão para acessar a página
+            if (!isset($controller) || !in_array($controller, $pgPermission)) {
+
+                $controller = 'app\\site\\controller\\LoginController';
+                $method = 'index';
+            
+            }
+
         }
 
         call_user_func_array(

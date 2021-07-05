@@ -24,6 +24,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{BASE}}sobre/">Sobre</a>
                 </li>
+                <li class="nav-item">
+                    {% if session.Cliente %}
+                    <a class="nav-link" href="{{BASE}}dashboard/area/">Área</a>
+                    {% else %}
+                    <a class="nav-link" href="{{BASE}}login/">Área</a>
+                    {% endif %}
+                </li>
             </ul>
 
             <form method="get" action="{{BASE}}pesquisa/" id="frmPesquisa" class="d-flex">

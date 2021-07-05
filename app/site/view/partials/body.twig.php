@@ -16,9 +16,23 @@
 
     {% include "partials/header.twig.php" %}
 
-    <div class="container">
+    <main class="container mt-4">
+
         {% block body %}{% endblock %}
-    </div>
+    
+    </main>
+
+    <footer class="footer">
+    
+        <div class="container text-center">
+    
+            {% block footer %}
+            <span class="text-muted">&copy; Copyright 2021 by <a href="http://www.wallaceoliveira.com">Wallace Oliveira</a>.</span>
+            {% endblock %}
+    
+        </div>
+    
+    </footer>
 
     <script src="{{BASE}}js/script.js"></script>
 
