@@ -28,7 +28,7 @@ function pesquisar() {
 
         alert('[ERRO] Formulário inválido!');
         
-        return;
+        return false;
 
     }
 
@@ -36,5 +36,7 @@ function pesquisar() {
     var url = form.action + 'p/' + getValueById('txtPesquisa');
 
     document.location.href = url;
+
+    return false;
 
 }

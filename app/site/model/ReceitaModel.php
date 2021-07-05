@@ -103,10 +103,10 @@ class ReceitaModel {
 
     public function pesquisar(string $termo) {
 
-        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE r.titulo LIKE :t OR r.linha_fina LIKE :l ORDER BY r.titulo ASC';
+        $sql = 'SELECT r.id, r.titulo, r.slug, r.linha_fina, r.descricao, r.categoria_id, r.data, c.titulo AS categoria FROM receita r INNER JOIN categoria c ON c.id = r.categoria_id WHERE UPPER(r.titulo) LIKE :t OR UPPER(r.linha_fina) LIKE :l ORDER BY r.titulo ASC';
         $params = [
-            ':t' => "%". $termo . "%", //"%{$termo}%"
-            ':l' => "%". $termo . "%" //"%{$termo}%"
+            ':t' => strtoupper("%". $termo . "%"), //"%{$termo}%"
+            ':l' => strtoupper("%". $termo . "%") //"%{$termo}%"
         ];
         $dt = $this->pdo->executeQuery($sql, $params);
 

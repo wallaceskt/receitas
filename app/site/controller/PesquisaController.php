@@ -8,14 +8,20 @@ class PesquisaController extends Controller {
     
     public function __construct() {
 
-        //echo "Olá, Mundo!";
+        #
         
     }
 
     public function index() {
 
-        //$this->load('home/main');
-        echo '[ERRO] Página inexistente!';
+        $this->showMessage(
+            'Página inexistente',
+            'Página inexistente ou não encontrada.',
+            '',
+            404
+        );
+
+        return;
 
     }
 
