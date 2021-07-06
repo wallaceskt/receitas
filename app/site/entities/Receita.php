@@ -9,9 +9,10 @@ class Receita {
     private $slug;
     private $linhaFina;
     private $descricao;
-    private $categoriaId;
     private $categoria;
     private $data;
+    private $imagem;
+    private $categoriaId;
 
     // Métodos acessores e modificadores
     public function getId() {
@@ -74,18 +75,6 @@ class Receita {
     
     }
 
-    public function getCategoriaId() {
-
-        return $this->categoriaId;
-    
-    }
-
-    public function setCategoriaId($id) {
-
-        $this->categoriaId = $id;
-    
-    }
-
     public function getCategoria() {
 
         return $this->categoria;
@@ -107,6 +96,30 @@ class Receita {
     public function setData($data) {
 
         $this->data = $data;
+    
+    }
+
+    public function getImagem() {
+
+        return $this->imagem;
+    
+    }
+
+    public function setImagem($imagem) {
+
+        $this->imagem = $imagem;
+    
+    }
+
+    public function getCategoriaId() {
+
+        return $this->categoriaId;
+    
+    }
+
+    public function setCategoriaId($id) {
+
+        $this->categoriaId = $id;
     
     }
 

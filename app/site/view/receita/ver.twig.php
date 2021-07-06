@@ -14,7 +14,7 @@
 
     <h5>{{receita.linhaFina}}</h5>
     <p><em>Categoria: {{receita.categoria}}<br>Publicado em {{receita.data|date('d/m/Y H:i:s')}}</em></p>
-    <!-- <p>{{receita.slug}}</p> -->
+    <img src="{{BASE}}img/{{receita.imagem}}" alt="{{receita.titulo}}">
     <p>{{receita.descricao|raw}}</p>
 
 </div>

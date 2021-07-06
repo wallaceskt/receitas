@@ -61,6 +61,13 @@
         
             <div class="form-group mt-4">
                 
+                <label for="txtImagem" class="form-label">Imagem</label>
+                <input type="text" class="form-control" id="txtImagem" name="txtImagem" placeholder="https://meusite.com/img/img.jpg" minlength="5" maxlenght="100">
+            
+            </div>
+        
+            <div class="form-group mt-4">
+                
                 <label for="txtDescricao" class="form-label">Receita</label>
                 <textarea id="txtDescricao" name="txtDescricao"></textarea>
             

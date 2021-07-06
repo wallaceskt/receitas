@@ -36,6 +36,14 @@ function validar(validateId) {
         
     }
 
+    if (getValueById('txtImagem').length < 5) {
+
+        appendHTMLById('divAlert', '<div class="alert alert-warning">[ERRO] Informe uma imagem - mínimo 5 caracteres.</div>');
+
+        valid = false;
+        
+    }
+
     if (CKEDITOR.instances['txtDescricao'].getData().length < 10) {
 
         appendHTMLById('divAlert', '<div class="alert alert-warning">[ERRO] Descricao inválida - mínimo 10 caracteres.</div>');

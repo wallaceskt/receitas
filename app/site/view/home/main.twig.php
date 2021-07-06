@@ -19,7 +19,8 @@
 
             <div class="card-body">
                 <h4 class="card-title">{{receita.titulo}}</h4>
-                <p class="card-text">{{receita.linhaFina}}</p>
+                <!-- <p class="card-text">{{receita.linhaFina}}</p> -->
+                <img src="{{BASE}}img/{{receita.imagem}}" alt="{{receita.titulo}}" class="w-100">
                 <a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-success w-100">Ver receita</a>
             </div>
 

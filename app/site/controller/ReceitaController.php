@@ -183,8 +183,9 @@ class ReceitaController extends Controller {
         $receita->setSlug(filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING));
         $receita->setLinhaFina(filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING));
         $receita->setDescricao(filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_SPECIAL_CHARS));
-        $receita->setCategoriaId(filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT));
         $receita->setData(getCurrentDate());
+        $receita->setImagem(filter_input(INPUT_POST, 'txtImagem', FILTER_SANITIZE_STRING));
+        $receita->setCategoriaId(filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT));
 
         return $receita;
 
@@ -205,6 +206,9 @@ class ReceitaController extends Controller {
             return false;
 
         if (strlen($receita->getDescricao()) < 10)
+            return false;
+
+        if (strlen($receita->getImagem()) < 5)
             return false;
 
         if ($receita->getCategoriaId() <= 0)
