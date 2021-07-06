@@ -3,7 +3,7 @@
 {% block title %}Início - Receitas{% endblock %}
 
 {% block body %}
-<h1>Início</h1>
+<h1>Destaques</h1>
 
 <hr>
 
@@ -15,13 +15,15 @@
     
         <div class="card border-secondary mb-3" style="max-width: 20rem;">
 
-            <div class="card-header">{{receita.categoria}}</div>
+            <div class="card-header">{{receita.titulo}}</div>
 
             <div class="card-body">
-                <h4 class="card-title">{{receita.titulo}}</h4>
+                <!-- <h4 class="card-title">{{receita.titulo}}</h4> -->
                 <!-- <p class="card-text">{{receita.linhaFina}}</p> -->
-                <img src="{{BASE}}img/{{receita.imagem}}" alt="{{receita.titulo}}" class="w-100">
-                <a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-success w-100">Ver receita</a>
+                <a href="{{BASE}}receita/ver/{{receita.slug}}">
+                <img src="{{BASE}}img/{{receita.imagem}}" alt="{{receita.titulo}}" class="w-100 img-thumb">
+                </a>
+                <a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-success w-100 mt-2">Ver receita</a>
             </div>
 
         </div>

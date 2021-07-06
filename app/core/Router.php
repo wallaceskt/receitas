@@ -71,6 +71,7 @@ class Router {
         }
         
         $baseController = 'app\\site\\controller\\';
+
         if (isset($_SESSION['Cliente'])) {
             
             $pgPermission = [$baseController . 'DashboardController', $baseController . 'CategoriaController', $baseController . 'ReceitaController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'LoginController', $baseController . 'PesquisaController'];
@@ -84,7 +85,7 @@ class Router {
             
         } else {
             
-            $pgPermission = [$baseController . 'LoginController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'PesquisaController'];
+            $pgPermission = [$baseController . 'DashboardController', $baseController . 'ReceitaController', $baseController . 'LoginController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'PesquisaController'];
             // Se não exixtir nenhum controller ou se o controller não estiver dentro do array de página(s)/controller(s) permitidos, o cliente não tem permissão para acessar a página
             if (!isset($controller) || !in_array($controller, $pgPermission)) {
 

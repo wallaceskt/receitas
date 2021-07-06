@@ -19,7 +19,8 @@ class ReceitaModel {
         $sql = 'INSERT INTO receita (titulo, slug, linha_fina, descricao, data, imagem, categoria_id) VALUES (:t, :s, :l, :d, :dt, :i, :cid)';
         $params = [
             ':t' => $receita->getTitulo(),
-            ':s' => gerarSlug($receita->getTitulo()),//$receita->getSlug(),
+            //':s' => gerarSlug($receita->getTitulo()),
+            ':s' => $receita->getSlug(),
             ':l' => $receita->getLinhaFina(),
             ':d' => $receita->getDescricao(),
             ':dt' => $receita->getData(),

@@ -27,7 +27,7 @@
 
             <div class="row">
             
-                <div class="form-group col-md-4 mt-4">
+                <div class="form-group col-md-8 mt-4">
                     
                     <label for="txtTitulo" class="form-label">Título</label>
                     <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet" value="{{receita.titulo}}">
@@ -35,12 +35,12 @@
                 
                 </div>
             
-                <div class="form-group col-md-4 mt-4">
+                <!-- <div class="form-group col-md-4 mt-4">
                 
                     <label for="txtSlug" class="form-label">Slug</label>
                     <input type="text" class="form-control" id="txtSlug" name="txtSlug" placeholder="lorem-ipsum-dolor-sit-amet" value="{{receita.slug}}">
                 
-                </div>
+                </div> -->
             
                 <div class="form-group col-md-4 mt-4">
                     

@@ -6,6 +6,8 @@
 <h1>Categorias</h1>
 <p><a href="{{BASE}}categoria/adicionar/" class="btn btn-primary">Nova categoria</a></p>
 
+<hr>
+
 <div class="overflow-auto">
     
     <table class="table table-hover">
@@ -24,7 +26,8 @@
                 <td>{{categoria.id}}</td>
                 <td>{{categoria.titulo}}</td>
                 <td>{{categoria.slug}}</td>
-                <td><a href="{{BASE}}categoria/editar/{{categoria.id}}" class="btn btn-warning">Editar</a> | <a href="{{BASE}}categoria/excluir/{{categoria.id}}" class="btn btn-warning">Excluir</a></td>
+                <td>
+                <a href="{{BASE}}categoria/editar/{{categoria.id}}" class="btn btn-warning">Editar</a> <a href="{{BASE}}categoria/excluir/{{categoria.id}}" class="btn btn-danger">Excluir</a></td>
             </tr>
             {% endfor %}
 

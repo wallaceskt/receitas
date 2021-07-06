@@ -18,5 +18,4 @@
     <p>{{receita.descricao|raw}}</p>
 
 </div>
-
 {% endblock %}

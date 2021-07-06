@@ -137,15 +137,8 @@ class ReceitaController extends Controller {
 
     public function alterar($receitaId = 0) {
 
-        // $receitaId = filter_var($receitaId, FILTER_SANITIZE_NUMBER_INT);
-        // $titulo = filter_input(INPUT_POST, 'txtTitulo', FILTER_SANITIZE_STRING);
-        // $slug = filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING);
-        // $linhaFina = filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING);
-        // $descricao = filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_STRING);
-        // $caegoriaId = filter_var($categoriaId, FILTER_SANITIZE_NUMBER_INT);
         $receita = $this->getInput();
         $receita->setId($receitaId);
-        //dd($receita);
 
         if (!$this->validar($receita)) {
 
@@ -172,7 +165,6 @@ class ReceitaController extends Controller {
         }
 
         redirect(BASE . 'receita/');
-        //redirect(BASE . 'receita/editar/' . $receitaId);
 
     }
 
@@ -180,7 +172,8 @@ class ReceitaController extends Controller {
 
         $receita = new Receita();
         $receita->setTitulo(filter_input(INPUT_POST, 'txtTitulo', FILTER_SANITIZE_STRING));
-        $receita->setSlug(filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING));
+        //$receita->setSlug(filter_input(INPUT_POST, 'txtSlug', FILTER_SANITIZE_STRING));
+        $receita->setSlug(gerarSlug($receita->getTitulo()));
         $receita->setLinhaFina(filter_input(INPUT_POST, 'txtLinhaFina', FILTER_SANITIZE_STRING));
         $receita->setDescricao(filter_input(INPUT_POST, 'txtDescricao', FILTER_SANITIZE_SPECIAL_CHARS));
         $receita->setData(getCurrentDate());
