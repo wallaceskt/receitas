@@ -8,6 +8,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="{{BASE}}img/favicon.png" rel="icon">
     <link rel="stylesheet" href="{{BASE}}css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css">
     <link rel="stylesheet" href="{{BASE}}css/style.css">
 
     {% block head %}{% endblock %}
