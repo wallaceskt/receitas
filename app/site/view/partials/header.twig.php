@@ -15,9 +15,11 @@
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li> -->
+                {% if session.Cliente %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{BASE}}categoria/">Categorias</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{BASE}}receita/">Receitas</a>
                 </li>
