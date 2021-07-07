@@ -58,6 +58,9 @@
                 {% if session.Cliente %}
                 <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-warning">Editar</a>
                 <a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-danger">Excluir</a>
+                {% else %}
+                <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-warning disabled" aria-disabled="true">Editar</a>
+                <a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-danger disabled" aria-disabled="true">Excluir</a>
                 {% endif %}
                 </td>
             </tr>
