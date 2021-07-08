@@ -179,6 +179,7 @@ class ReceitaController extends Controller {
         $receita->setData(getCurrentDate());
         $receita->setImagem(filter_input(INPUT_POST, 'txtImagem', FILTER_SANITIZE_STRING));
         $receita->setCategoriaId(filter_input(INPUT_POST, 'slCategoria', FILTER_SANITIZE_NUMBER_INT));
+        $receita->setClienteId(filter_input(INPUT_POST, 'txtClienteId', FILTER_SANITIZE_NUMBER_INT));
 
         return $receita;
 

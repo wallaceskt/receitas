@@ -13,6 +13,10 @@ class Receita {
     private $data;
     private $imagem;
     private $categoriaId;
+    private $clienteId;
+    private $clienteNome;
+    private $clienteEmail;
+    private $clienteCadastro;
 
     // Métodos acessores e modificadores
     public function getId() {
@@ -120,6 +124,54 @@ class Receita {
     public function setCategoriaId($id) {
 
         $this->categoriaId = $id;
+    
+    }
+
+    public function getClienteId() {
+
+        return $this->clienteId;
+    
+    }
+
+    public function setClienteId($id) {
+
+        $this->clienteId = $id;
+    
+    }
+
+    public function getClienteNome() {
+
+        return $this->clienteNome;
+    
+    }
+
+    public function setClienteNome($nome) {
+
+        $this->clienteNome = $nome;
+    
+    }
+
+    public function getClienteEmail() {
+
+        return $this->clienteEmail;
+    
+    }
+
+    public function setClienteEmail($email) {
+
+        $this->clienteEmail = $email;
+    
+    }
+
+    public function getClienteCadastro() {
+
+        return $this->clienteCadastro;
+    
+    }
+
+    public function setClienteCadastro($data) {
+
+        $this->clienteCadastro = $data;
     
     }
 

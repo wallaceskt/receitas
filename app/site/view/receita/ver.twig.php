@@ -6,7 +6,7 @@
 <h1>{{receita.titulo}}</h1>
 
 <a href="{{BASE}}receita/" class="btn btn-primary">Voltar</a> 
-{% if session.Cliente %}
+{% if session.Cliente and receita.clienteId == session.Cliente.id %}
 <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-primary">Editar</a> 
 <a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-primary">Excluir</a>
 {% else %}
@@ -19,7 +19,7 @@
 <div class="row">
 
     <h5>{{receita.linhaFina}}</h5>
-    <p><em>Categoria: {{receita.categoria}}<br>Publicado em {{receita.data|date('d/m/Y H:i:s')}}</em></p>
+    <p><em>Categoria: {{receita.categoria}}<br>Publicado em {{receita.data|date('d/m/Y H:i:s')}}<br>Por: {{receita.clienteNome}} (membro desde {{receita.clienteCadastro|date('Y')}})</em></p>
     <img src="{{BASE}}img/{{receita.imagem}}" alt="{{receita.titulo}}">
     <p>{{receita.descricao|raw}}</p>
 

@@ -29,6 +29,7 @@
                     
                     <label for="txtTitulo" class="form-label">Título</label>
                     <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Lorem ipsum dolor sit amet">
+                    <input type="hidden" id="txtClienteId" value="{{clienteId}}">
                 
                 </div>
             
