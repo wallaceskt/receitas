@@ -35,7 +35,7 @@ class ClienteController extends Controller {
 
             $this->showMessage(
                 'Fomulário inválido',
-                'Dados inválidos ou incompletos.',
+                'Dados inválidos ou incompletos. O nome deve ter pelo menos 3 caracteres, o e-mail deve ser válido e a senha deve ter pelo menos 6 caracteres e deve incluir pelo menos uma letra maiúscula, um número e um caractere especial.',
                 'cliente/adicionar'
             );
 
@@ -57,7 +57,8 @@ class ClienteController extends Controller {
 
         }
 
-        redirect(BASE . 'dashboard/area');
+        redirect(BASE . 'login/main');
+        //redirect(BASE . 'dashboard/area');
 
     }
 

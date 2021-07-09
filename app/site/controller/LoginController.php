@@ -10,8 +10,6 @@ class LoginController extends Controller {
     
     public function __construct() {
 
-        //echo "Olá, Mundo!";
-        //echo '[ERRO] Página inexistente de login!';
         $this->loginModel = new LoginModel();
         
     }

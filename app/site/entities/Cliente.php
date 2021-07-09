@@ -56,7 +56,8 @@ class Cliente {
 
     public function setSenha($senha) {
 
-        $this->senha = $senha;
+        if ($this->validarSenha($senha))
+            $this->senha = $senha;
     
     }
     
@@ -68,7 +69,8 @@ class Cliente {
 
     public function setConfirmaSenha($senha) {
 
-        $this->confirmaSenha = $senha;
+        if ($this->validarSenha($senha))
+            $this->confirmaSenha = $senha;
     
     }
     
@@ -82,6 +84,31 @@ class Cliente {
 
         $this->dataCadastro = $cadastro;
     
+    }
+
+    public function validarSenha($senha) {
+
+        $valor = false;
+
+        $confere = filter_var(
+            $senha, 
+            FILTER_VALIDATE_REGEXP,
+            array("options" => array( "regexp" => "/^[a-zA-Z0-9\W]{6,20}$/"))
+        );
+        
+        // Valida a força da senha
+        // $uppercase = preg_match('@[A-Z]@', $senha);
+        // $lowercase = preg_match('@[a-z]@', $senha);
+        // $number    = preg_match('@[0-9]@', $senha);
+        // $specialChars = preg_match('@[^\w]@', $senha);
+
+        //  if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($senha) < 8)
+        if ($confere)// && (strlen($password) > 5 && strlen($password) <= 13))
+            $valor = true;
+
+        return $valor;
+
+
     }
     
 }
