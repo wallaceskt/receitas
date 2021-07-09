@@ -20,16 +20,16 @@ class Router {
     private function init() {
 
         $uri = $_SERVER['REQUEST_URI'];
-        
+
         $uri = str_replace('?', '/', $uri);
 
         // Divide a string $uri pelo delimitador / e remove índices em branco no array e reordena seus índices
         $ex = array_values(array_filter(explode('/', $uri)));
-        
+
         // Remove o índice idesejado
         for ($i = 0; $i < UNSET_COUNT; $i++)
             unset($ex[$i]);
-        
+
         // Reordena todos os índices do array
         $this->uriEx = array_values(array_filter($ex));
 
@@ -42,14 +42,14 @@ class Router {
 
         // Verifica se existe algo (uma classe) na posição 0
         if (isset($this->uriEx[0])) {
-            
+
             $c = 'app\\site\\controller\\' . ucfirst($this->uriEx[0]) . 'Controller';
 
             // Verifica se a classe informada foi implementada
             if (class_exists($c)) {
-                
+
                 $class = ucfirst($this->uriEx[0]) . 'Controller';
-            
+
             }
 
         }
@@ -67,31 +67,31 @@ class Router {
                 $method = $this->uriEx[1];
 
             }
-        
+
         }
-        
+
         $baseController = 'app\\site\\controller\\';
 
         if (isset($_SESSION['Cliente'])) {
-            
+
             $pgPermission = [$baseController . 'DashboardController', $baseController . 'CategoriaController', $baseController . 'ReceitaController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'LoginController', $baseController . 'PesquisaController'];
             // Se não existir nenhum controller ou se o controller não estiver dentro do array de página(s)/controller(s) permitidos, o cliente não tem permissão para acessar a página
             if (!isset($controller) || !in_array($controller, $pgPermission)) {
 
                 $controller = 'app\\site\\controller\\LoginController';
                 $method = 'index';
-            
+
             }
-            
+
         } else {
-            
-            $pgPermission = [$baseController . 'DashboardController', $baseController . 'ReceitaController', $baseController . 'LoginController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'PesquisaController'];
+
+            $pgPermission = [$baseController . 'DashboardController', $baseController . 'ReceitaController', $baseController . 'LoginController', $baseController . 'SobreController', $baseController . 'HomeController', $baseController . 'PesquisaController', $baseController . 'ClienteController'];
             // Se não exixtir nenhum controller ou se o controller não estiver dentro do array de página(s)/controller(s) permitidos, o cliente não tem permissão para acessar a página
             if (!isset($controller) || !in_array($controller, $pgPermission)) {
 
                 $controller = 'app\\site\\controller\\LoginController';
                 $method = 'index';
-            
+
             }
 
         }
@@ -116,7 +116,7 @@ class Router {
             // Se existir parâmetros o laço vai popular o array $p
             for ($i = 2; $i < count($this->uriEx); $i++)
                 $p[] = $this->uriEx[$i];
-            
+
         }
 
         return $p;

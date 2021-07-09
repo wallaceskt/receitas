@@ -7,8 +7,11 @@
 
 <a href="{{BASE}}" class="btn btn-primary">Voltar</a> 
 <a href="{{BASE}}login/logout/" class="btn btn-primary">Sair</a> 
-<!-- <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-primary">Editar</a> 
-<a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-primary">Excluir</a> -->
+
+{% if session.Cliente and cliente.id == session.Cliente.id %}
+<a href="{{BASE}}cliente/editar/{{session.Cliente.id}}" class="btn btn-primary">Editar</a> 
+<a href="{{BASE}}cliente/excluir/{{session.Cliente.id}}" class="btn btn-primary">Excluir</a>
+{% endif %}
 
 <hr>
 

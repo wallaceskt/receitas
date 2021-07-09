@@ -34,7 +34,15 @@
         
                     <div class="form-group mt-4">
 
-                        <button type="submit" class="btn btn-success">Entrar</button>
+                        <button type="submit" class="btn btn-success w-100">Entrar</button>
+
+                    </div>
+
+                    <hr class="mt-4">
+        
+                    <div class="form-group mt-4">
+
+                        <a href="{{BASE}}cliente/adicionar" class="btn btn-success btn-info w-100">Criar nova conta</a>
 
                     </div>
 

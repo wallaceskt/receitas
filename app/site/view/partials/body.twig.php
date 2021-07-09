@@ -23,12 +23,12 @@
     
     </main>
 
-    <footer class="footer">
+    <footer class="footer mt-5">
     
         <div class="container text-center">
     
             {% block footer %}
-            <span class="text-muted">&copy; Copyright 2021 by <a href="http://www.wallaceoliveira.com">Wallace Oliveira</a>.</span>
+            <span class="text-muted">&copy; Copyright 2021-{{"now"|date("Y")}} por <a href="http://www.wallaceoliveira.com">Wallace Oliveira</a>.</span>
             {% endblock %}
     
         </div>

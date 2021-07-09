@@ -55,7 +55,7 @@
                 <td>{{receita.categoria}}</td>
                 <td>{{receita.data|date('d/m/Y H:i:s')}}</td>
                 <td><a href="{{BASE}}receita/ver/{{receita.slug}}" class="btn btn-info">Ver</a>
-                {% if session.Cliente %}
+                {% if session.Cliente and session.Cliente.id == receita.clienteId %}
                 <a href="{{BASE}}receita/editar/{{receita.id}}" class="btn btn-warning">Editar</a>
                 <a href="{{BASE}}receita/excluir/{{receita.id}}" class="btn btn-danger">Excluir</a>
                 {% else %}

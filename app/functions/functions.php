@@ -43,7 +43,7 @@ function gerarSlug(string $str) {
     $str = strtolower($str);
 
     return $str;
-    /*Significa que vai procurar por  qualquer um desses â|á|ã ou as outras 
+    /*Significa que vai procurar por qualquer um desses â|á|ã ou as outras 
     letras e, i, o, u e caracteres especiais e vai trocar pela letra normal ou pelo -*/
 
 }
